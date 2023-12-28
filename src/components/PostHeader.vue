@@ -1,18 +1,15 @@
 <template>
-    <div class="d-flex justify-space-between align-center" @click="visitProfile">
-        <div class="d-sm-flex align-center">
+    <div class="d-flex align-center">
+        <div>
             <Avatar :src="path"></Avatar>
-            <div class="ma-2">{{ name }}</div>
         </div>
         <div>
-            {{ $filters.fromNow(new Date(createdAt)) }}
+            <div @click="visitProfile" class="hvr">{{ name }}</div>
+            <div class="font-weight-light text-subtitle-2">
+                {{ $filters.fromNow(new Date(createdAt)) }}
+            </div>
         </div>
     </div>
-    <!-- <v-list-item
-    :title="name"
-    :subtitle="$filters.fromNow(new Date(createdAt))"
-    :prepend-avatar="path"
-  ></v-list-item> -->
 </template>
 <script setup>
 import Avatar from './Avatar.vue';
@@ -25,36 +22,31 @@ const props = defineProps({
         required: true
     },
     createdAt:{
-        // type: String,
         required: true
-    },
-    // src:{
-        // type: String,
-    //     required: true
-    // },
-    // firstName:{
-        // type: String,
-    //     required: true
-    // },
-    // lastName:{
-        // type: String,
-    //     required: true
-    // },
-    // email:{
-        // type: String,
-    //     required: true
-    // },
+    }
 })
-const path = computed(()=>{ return `https://social-backend-9yb5.onrender.com/avatars/${props.user.avatar}` })
-const name = computed(()=>{ return `${props.user.firstName} ${props.user.lastName}` || props.user.email.split('@')[0]})
+const path = computed(()=>{
+    const defaultUrl = 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'
+    const photo = props.user.avatar ? `https://social-backend-9yb5.onrender.com/avatars/${props.user.avatar}` : defaultUrl
+    return photo
+})
+const name = computed(()=>{
+    if(props.user.firstName && props.user.lastName){
+        return `${props.user.firstName} ${props.user.lastName}`
+    }else if(props.user.email && !props.user.firstName && !props.user.lastName){
+        return props.user.email.split('@')[0]
+    }else{
+        return 'Anonymous User'
+    }
+})
 const visitProfile = () => {
     const {_id} = props.user
     Router.push({path: `/main/profile/${_id}`})
 }
 </script>
-<!-- <style scoped>
+<style scoped>
 .hvr:hover{
     cursor: pointer;
-    background-color: rgb(227, 227, 227);
+    text-decoration: underline;
 }
-</style> -->
+</style>

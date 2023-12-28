@@ -16,7 +16,7 @@
                     v-model="uploader"
                 ></v-file-input>
             </template>
-            <!-- <Alert v-if="msg" :msg="msg"></Alert> -->
+            <Alert v-if="msg" :msg="msg"></Alert>
             <v-btn
             color="deep-purple"
             type="submit"
@@ -27,18 +27,21 @@
     </v-card>
 </template>
 <script setup>
-// import { defineAsyncComponent } from 'vue';
-// const Alert = defineAsyncComponent(()=>import('@/components/Alert.vue'))
+import { defineAsyncComponent } from 'vue';
+const Alert = defineAsyncComponent(()=>import('@/components/Alert.vue'))
 import jwtInterceptor from '@/axios/auth-axios.instance';
+import { usePostStore } from '@/store/post';
 import { computed } from 'vue';
 import { onMounted } from 'vue';
 import { ref } from 'vue';
+import { err_Msg } from '@/helpers/helpers';
+const { updatePost } = usePostStore()
 const text = ref('')
 const uploader = ref(null)
 const loading = ref(false)
 const newMedia = ref(false)
 const msg = ref(null)
-// const emit = defineEmits(['PostSaved'])
+const emit = defineEmits(['PostUpdated'])
 const props = defineProps({
     postId:{
         required: true,
@@ -57,7 +60,7 @@ onMounted(()=>{
 })
 const _postMedia = computed(()=>{
     if(props.postMedia){
-        return props.postMedia.url.split('-')[1]
+        return props.postMedia.url.split('*%*&%')[1]
     }
     return null
 })
@@ -73,7 +76,8 @@ const savePost = () => {
         return res.data
     }).then(data=>{
         loading.value = false
-        console.log(data)
+        updatePost(data)
+        emit('PostUpdated')
     }).catch(err=>{
         console.log(err)
         msg.value = err.response.data.message || err_Msg()

@@ -8,6 +8,9 @@ export const usePostStore = defineStore('post',{
         setAllPosts(data){
             this.allPosts = data
         },
+        addPost(post){
+            this.allPosts.unshift(post)
+        },
         getPostById(id){
             const filter = this.allPosts.filter(item=>item._id == id)
             return filter[0]
@@ -35,6 +38,10 @@ export const usePostStore = defineStore('post',{
         addToPostComments(_id,comment){
             const index = this.allPosts.findIndex(item=>item._id == _id)
             this.allPosts[index].comments.push(comment)
+        },
+        updatePost(post){
+            const index = this.allPosts.findIndex(item=>item._id == post._id)
+            this.allPosts[index] = post
         }
     }
 })

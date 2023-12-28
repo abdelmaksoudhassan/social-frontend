@@ -1,7 +1,7 @@
 <template>
     <v-select
       style="width: 100px;"
-      ref="x"
+      ref="switcher"
       v-model="$i18n.locale"
       :items="$i18n.availableLocales"
       item-text="name"
@@ -13,19 +13,15 @@
 <script setup>
 import { onMounted } from 'vue';
 import { ref } from 'vue';
-import { useI18n } from 'vue-i18n';
-const x = ref(null)
-const i18n = useI18n()
+const switcher = ref(null)
 onMounted(()=>{
     const lang = localStorage.getItem("lang")
     if(!! lang){
-        x.value.$i18n.locale = lang
-        checkLanguage(lang)
-        // document.querySelector('html').classList.add('is-rtl')
+        switcher.value.$i18n.locale = lang
     }
 })
 const handleDir = () => {
-    const lang = x.value.$i18n.locale
+    const lang = switcher.value.$i18n.locale
     localStorage.setItem("lang",lang)
     checkLanguage(lang)
 }

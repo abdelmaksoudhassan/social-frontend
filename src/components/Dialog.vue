@@ -1,30 +1,30 @@
 <template>
   <v-dialog
-      v-model="dialog"
-      fullscreen
-      :scrim="false"
-      transition="dialog-bottom-transition"
-    >
+    v-model="dialog"
+    fullscreen
+    :scrim="false"
+    transition="dialog-bottom-transition"
+  >
     <v-card>
-        <v-toolbar
+      <v-toolbar
+        dark
+        color="deep-purple"
+      >
+        <v-btn
+          icon
           dark
-          color="deep-purple"
+          @click="dialog = false"
         >
-          <v-btn
-            icon
-            dark
-            @click="dialog = false"
-          >
-            <v-icon>mdi-close</v-icon>
-          </v-btn>
-          <span>{{ title }}</span>
-        </v-toolbar>
-        <v-list
-          lines="two"
-          subheader
-        >
-            <slot name="body"></slot>
-        </v-list>
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
+        <span>{{ title }}</span>
+      </v-toolbar>
+      <v-list
+        lines="two"
+        subheader
+      >
+        <slot name="body"></slot>
+      </v-list>
     </v-card>
   </v-dialog>
 </template>

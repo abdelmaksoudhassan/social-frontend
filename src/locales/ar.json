@@ -43,5 +43,8 @@
     "lastUpdate": "أخر تحديث",
     "willSendNewPassword": "سيتم إرسال كلمة مرور جديدة علي البريد الإلكترونى",
     "enterCorrectEmail": "ادخل بريد الكترونى صحيح",
-    "passwordMessage": "ادخل كلمة مرور مناسبة (25:8 رمز)"
+    "passwordMessage": "ادخل كلمة مرور مناسبة (25:8 رمز)",
+    "posts": "المنشورات",
+    "setting": "الإعدادات",
+    "profile": "الملف الشخصى"
 }

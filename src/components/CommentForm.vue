@@ -1,17 +1,11 @@
 <template>
     <v-form  @submit.prevent="sendComment">
-        <v-text-field
-            :label="$t('comment')"
-            class="d-inline"
-            variant="outlined"
-            clearable
-            v-model="comment_"
-        ></v-text-field>
+        <input type="text" v-model="comment_" class="txt" :placeholder="$t('comment')" />
         <v-btn
             type="submit"
             :text="$t('send')"
-            size="x-large"
             color="primary"
+            :loading="loading"
         ></v-btn>
     </v-form>
 </template>
@@ -21,6 +15,7 @@ import { onMounted } from 'vue';
 import { ref } from 'vue';
 const emit = defineEmits(['CommentDone'])
 const comment_ = ref('')
+const loading = ref(false)
 onMounted(()=>{
     comment_.value = props.comment
 })
@@ -45,6 +40,7 @@ const sendComment = () => {
     if(comment_.value.length == 0){
         return
     }
+    loading.value = true
     jwtInterceptor({
         url: props.url,
         method: props.method,
@@ -55,25 +51,23 @@ const sendComment = () => {
         return res.data
     }).then(data=>{
         emit('CommentDone',data)
+        loading.value = false
+        comment_.value = ''
     }).catch(err=>{
+        loading.value = false
         console.log(err)
     })
 }
 </script>
 <style scoped>
-.v-messages{
-    min-height: unset;
-}
-.v-input__details {
-    min-height: unset;
-    padding-top: unset;
-}
-.v-btn.v-btn--density-default{
-    height: unset;
+.txt{
+    border: 1px solid black;
+    width: 100%;
 }
 .fixed-bottom{
     position: fixed;
     bottom: 0px;
     width: 100%;
+    background-color: white;
 }
 </style>

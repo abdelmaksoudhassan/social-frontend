@@ -6,9 +6,11 @@ export const useAuthStore = defineStore('auth', {
     user: {}
   }),
   getters:{
-    avatarPath(state){
-      const url = 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'
-      return (state.user && state.user.avatar) ? state.user.avatar : url
+    id(state){
+      return state.user ? state.user._id : null
+    },
+    name(state){
+      return state.user.firstName&&state.user.lastName ? `${state.user.firstName} ${state.user.lastName}` : state.user.email.split('@')[0]
     }
   },
   actions:{
@@ -17,6 +19,10 @@ export const useAuthStore = defineStore('auth', {
     },
     ownedComment(comment){
       const { _id } = comment.owner
+      return _id == this.user._id
+    },
+    ownedLike(like){
+      const { _id } = like.user
       return _id == this.user._id
     },
     ownedPost(post){

@@ -12,11 +12,12 @@
             ></v-file-input>
             <Alert v-if="msg" :msg="msg"></Alert>
             <v-btn
-            color="deep-purple"
-            type="submit"
-            :loading="loading"
-            append-icon="mdi-checkbox-marked-circle"
-            :disabled="text.length == 0">{{ $t('share') }}</v-btn>
+                color="deep-purple"
+                type="submit"
+                :loading="loading"
+                append-icon="mdi-checkbox-marked-circle"
+                :disabled="text.length == 0">{{ $t('share') }}
+            </v-btn>
         </v-form>
     </v-card>
 </template>

@@ -42,5 +42,8 @@
     "lastUpdate": "Last Update",
     "willSendNewPassword": "Will Send New Password On Your Email",
     "enterCorrectEmail": "Enter Correct Email",
-    "passwordMessage": "Password Must Be 8-25 Length"
+    "passwordMessage": "Password Must Be 8-25 Length",
+    "posts": "Posts",
+    "setting": "Settings",
+    "profile": "Profile"
 }

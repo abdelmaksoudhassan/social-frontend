@@ -8,12 +8,13 @@
             ></v-skeleton-loader>
         </template>
     </Suspense>
-    <Suspense>
-        <UserPosts></UserPosts>
-        <template #fallback> loading... </template>
-    </Suspense>
+    <PostScroller :url="url"></PostScroller>
 </template>
 <script setup>
+import PostScroller from '@/components/PostScroller.vue';
 import ProfileHeader from '@/components/ProfileHeader.vue';
-import UserPosts from '@/components/UserPosts.vue';
+import { useRoute } from 'vue-router';
+import { computed } from 'vue';
+const Route = useRoute()
+const url = computed(()=>{ return `/posts/user/${Route.params.id}` })
 </script>

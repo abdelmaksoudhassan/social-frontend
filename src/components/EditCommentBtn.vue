@@ -1,8 +1,8 @@
 <template>
     <v-btn :size="size" color="success" append-icon="mdi-pencil" @click="openDialog">{{$t('edit')}}</v-btn>
-    <Dialog ref="commentsDialog" :title="$('comments')">
+    <Dialog ref="commentsDialog" :title="$t('edit')">
         <template #body>
-            <CommentForm :comment="comment" method="Patch" :url="url" @CommentDone="onCommentDone"></CommentForm>
+            <CommentForm class="d-flex fixed-bottom" :comment="comment" method="Patch" :url="url" @CommentDone="onCommentDone"></CommentForm>
         </template>
     </Dialog>
 </template>

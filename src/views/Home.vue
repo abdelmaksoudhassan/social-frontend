@@ -52,6 +52,7 @@ import { err_Msg } from '@/helpers/helpers';
 import { useCookies } from "vue3-cookies";
 import { useAuthStore } from '@/store/auth'
 import { useI18n } from 'vue-i18n';
+import { io } from '@/helpers/socket-io';
 const { t } = useI18n()
 const SignupForm = defineAsyncComponent(()=>import('@/components/SignupForm.vue'))
 const Done = defineAsyncComponent(()=>import('@/components/Done.vue'))
@@ -87,6 +88,9 @@ function login(){
         cookies.set('Refresh-Token',refresh)
         AuthStore.setUser(user)
         Router.push({ name: 'Posts' })
+        io.connect()
+        io.emit('join',user._id)
+        console.log(user._id)
     }).catch(err=>{
         console.log(err)
         msg.value = !err.response ? err_Msg() : err.response.data.message || err_Msg()
