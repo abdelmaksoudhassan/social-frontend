@@ -125,9 +125,10 @@ const comments = computed(()=>{ return post.value.comments.length})
 const likes = computed(()=>{ return post.value.likes.length})
 onMounted(()=>{
     io.on('NewLike',(data)=>{
-      if(! AuthStore.ownedLike(data)){
-        post.value.likes.push(data)
-      }
+        PostStore.addToPostLikes(data)
+    }),
+    io.on('NewComment',(data)=>{
+        PostStore.addToPostComments(data)
     })
 })
 const getUrl = (id) => {

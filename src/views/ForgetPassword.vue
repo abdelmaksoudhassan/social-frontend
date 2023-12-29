@@ -9,8 +9,8 @@ import { defineAsyncComponent, computed } from 'vue';
 import { useRouter } from 'vue-router'
 import { shallowRef } from 'vue';
 import { useI18n } from 'vue-i18n';
-const { t } = useI18n()
 const Done = defineAsyncComponent(()=> import ('@/components/Done.vue'))
+const { t } = useI18n()
 const Router = useRouter()
 const currentComponent = shallowRef(ResetPasswordForm)
 const currentProperties = computed(()=>{

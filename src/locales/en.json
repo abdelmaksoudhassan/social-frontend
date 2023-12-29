@@ -45,5 +45,13 @@
     "passwordMessage": "Password Must Be 8-25 Length",
     "posts": "Posts",
     "setting": "Settings",
-    "profile": "Profile"
+    "profile": "Profile",
+    "logout": "Logout",
+    "wavesYou": "Waves You",
+    "postDeleted": "One Post Deleted",
+    "postEdited": "One Post Edited",
+    "newCommentOnYourPost" : "New Comment On Your Post",
+    "newLikeOnYourPost" : "New Like On Your Post",
+    "errMsg": "unexpected error occured !! open console for more info",
+    "wave": "Wave"
 }

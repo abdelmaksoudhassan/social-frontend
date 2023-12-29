@@ -23,7 +23,6 @@
 </template>
 <script setup>
 import { $axios } from '@/axios/axios.instance';
-import { err_Msg } from '@/helpers/helpers';
 import { useVuelidate } from '@vuelidate/core'
 import { useI18n } from 'vue-i18n';
 import { email as isEmail } from '@vuelidate/validators'
@@ -59,7 +58,7 @@ function resetPassword(){
         loading.value = false
     }).catch(err=>{
         console.log(err)
-        msg.value = err.response.data.message || err_Msg()
+        msg.value = err.response.data.message || t('errMsg')
         loading.value = false
     })
 }

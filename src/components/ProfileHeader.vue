@@ -8,7 +8,7 @@
                 >
                     <v-img :src="path"></v-img>
                 </v-avatar>
-                <v-btn @click="waveUser">Wave</v-btn>
+                <v-btn @click="waveUser" class="ma-3" prepend-icon="mdi-rocket">{{ $t('wave') }}</v-btn>
             </v-col>
             <v-col class="d-flex justify-center align-center">
                 <div>

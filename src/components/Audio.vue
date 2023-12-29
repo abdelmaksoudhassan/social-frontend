@@ -5,7 +5,6 @@
 </template>
 <script setup>
 import { computed, onMounted } from 'vue';
-
 const props = defineProps({
     path: {
         required: true,

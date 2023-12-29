@@ -48,7 +48,6 @@ import { shallowRef } from 'vue';
 import { computed } from 'vue';
 import { useRouter } from 'vue-router'
 import { $axios } from '../axios/axios.instance'
-import { err_Msg } from '@/helpers/helpers';
 import { useCookies } from "vue3-cookies";
 import { useAuthStore } from '@/store/auth'
 import { useI18n } from 'vue-i18n';
@@ -59,10 +58,10 @@ const Done = defineAsyncComponent(()=>import('@/components/Done.vue'))
 const Alert = defineAsyncComponent(()=>import('@/components/Alert.vue'))
 const Router = useRouter()
 const AuthStore = useAuthStore()
-const currentComponent = shallowRef(SignupForm)
-const email = ref('abdelmaksoudhassan67@gmail.com')
 const { cookies } = useCookies();
-const password = ref('12345678')
+const currentComponent = shallowRef(SignupForm)
+const email = ref('')
+const password = ref('')
 const dialogRef = ref(null)
 const msg = ref(null)
 const loading = ref(false)
@@ -90,10 +89,9 @@ function login(){
         Router.push({ name: 'Posts' })
         io.connect()
         io.emit('join',user._id)
-        console.log(user._id)
     }).catch(err=>{
         console.log(err)
-        msg.value = !err.response ? err_Msg() : err.response.data.message || err_Msg()
+        msg.value = !err.response ? t('errMsg') : err.response.data.message || t('errMsg')
         loading.value = false
     })
 }

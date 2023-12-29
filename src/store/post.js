@@ -39,6 +39,11 @@ export const usePostStore = defineStore('post',{
             const index = this.allPosts.findIndex(item=>item._id == _id)
             this.allPosts[index].comments.push(comment)
         },
+        addToPostLikes(like){
+            const { post } = like 
+            const index = this.allPosts.findIndex(item=>item._id == post)
+            this.allPosts[index].likes.push(like)
+        },
         updatePost(post){
             const index = this.allPosts.findIndex(item=>item._id == post._id)
             this.allPosts[index] = post

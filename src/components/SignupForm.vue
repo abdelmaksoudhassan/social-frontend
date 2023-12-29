@@ -28,14 +28,13 @@ import { useI18n } from 'vue-i18n';
 import { minLength, maxLength, email as isEmail } from '@vuelidate/validators'
 import { computed } from 'vue';
 import { $axios } from '@/axios/axios.instance'
-import { err_Msg } from '@/helpers/helpers'
 import { defineAsyncComponent } from 'vue';
 const Alert = defineAsyncComponent(()=>import('../components/Alert.vue'))
+const { t } = useI18n()
 const email = ref('')
 const emailRules = {
     isEmail
 }
-const { t } = useI18n()
 const email$ = useVuelidate(emailRules, email)
 const password = ref('')
 const passwordRules = {
@@ -80,7 +79,7 @@ const signup = () => {
         loading.value = false
         emit('OtpSent',message)
     }).catch(err=>{
-        msg.value = err.response.data.message || err_Msg()
+        msg.value = err.response.data.message || t('errMsg')
         console.log(err)
         loading.value = false
     })

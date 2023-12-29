@@ -35,11 +35,6 @@ const routes = [
         component: () => import('@/views/Posts.vue'),
       },
       {
-        path: '/post/:id',
-        name: 'PostDetails',
-        component: () => import('@/views/PostDetails.vue'),
-      },
-      {
         path: '/setting',
         name: 'Setting',
         component: () => import('@/views/ProfileSetting.vue')

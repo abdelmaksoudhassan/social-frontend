@@ -23,10 +23,11 @@
 </template>
 <script setup>
 import jwtInterceptor from '@/axios/auth-axios.instance';
-import { err_Msg } from '@/helpers/helpers';
+import { useI18n } from 'vue-i18n';
 import { defineAsyncComponent } from 'vue';
-const Alert = defineAsyncComponent(()=>import('@/components/Alert.vue'))
 import { ref } from 'vue';
+const Alert = defineAsyncComponent(()=>import('@/components/Alert.vue'))
+const { t } = useI18n()
 const text = ref('')
 const uploader = ref(null)
 const loading = ref(false)
@@ -43,11 +44,10 @@ const savePost = () => {
         return res.data
     }).then(data=>{
         loading.value = false
-        console.log(data)
         emit('PostSaved',data)
     }).catch(err=>{
         console.log(err)
-        msg.value = err.response.data.message || err_Msg()
+        msg.value = err.response.data.message || t('errMsg')
         loading.value = false
     })
 }

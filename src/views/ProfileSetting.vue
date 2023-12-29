@@ -62,17 +62,15 @@
 import { useVuelidate } from '@vuelidate/core'
 import { minLength, maxLength, alpha } from '@vuelidate/validators'
 import jwtInterceptor from '@/axios/auth-axios.instance';
-const Alert = defineAsyncComponent(()=>import('@/components/Alert.vue'))
 import { ref } from 'vue';
 import { useAuthStore } from '@/store/auth';
 import { useI18n } from 'vue-i18n';
 import PostHeader from '@/components/PostHeader.vue';
 import { computed } from 'vue';
 import { defineAsyncComponent } from 'vue';
-import { err_Msg } from '@/helpers/helpers';
+const Alert = defineAsyncComponent(()=>import('@/components/Alert.vue'))
 const AuthStore = useAuthStore()
 const { t } = useI18n()
-const user = computed(()=>{ return AuthStore.user })
 const valid = ref(false)
 const validAvatar = ref(false)
 const firstname =ref('')
@@ -113,6 +111,7 @@ const rules = [
     return !value || !value.length || value[0].size < 1024*1024 || t('memoryMessage')
   },
 ]
+const user = computed(()=>{ return AuthStore.user })
 const changeName = () => {
     const form = { firstName: firstname.value, lastName: lastname.value }
     nameLoading.value = true
@@ -123,7 +122,7 @@ const changeName = () => {
         nameLoading.value = false
     }).catch(err=>{
         console.log(err)
-        nameErr.value = err.response.data.message || err_Msg()
+        nameErr.value = err.response.data.message || t('errMsg')
         nameLoading.value = false
     })
 }
@@ -140,7 +139,7 @@ const changeAvatar = () => {
     avatar.value.pop()
   }).catch(err=>{
     console.log(err)
-    avatarErr.value = err.response.data.message || err_Msg()
+    avatarErr.value = err.response.data.message || t('errMsg')
     avatarLoading.value = false
   })
 }

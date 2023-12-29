@@ -28,13 +28,14 @@
 </template>
 <script setup>
 import { defineAsyncComponent } from 'vue';
-const Alert = defineAsyncComponent(()=>import('@/components/Alert.vue'))
 import jwtInterceptor from '@/axios/auth-axios.instance';
 import { usePostStore } from '@/store/post';
 import { computed } from 'vue';
 import { onMounted } from 'vue';
 import { ref } from 'vue';
-import { err_Msg } from '@/helpers/helpers';
+import { useI18n } from 'vue-i18n';
+const Alert = defineAsyncComponent(()=>import('@/components/Alert.vue'))
+const { t } = useI18n()
 const { updatePost } = usePostStore()
 const text = ref('')
 const uploader = ref(null)
@@ -80,7 +81,7 @@ const savePost = () => {
         emit('PostUpdated')
     }).catch(err=>{
         console.log(err)
-        msg.value = err.response.data.message || err_Msg()
+        msg.value = err.response.data.message || t('errMsg')
         loading.value = false
     })
 }
