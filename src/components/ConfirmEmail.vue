@@ -23,11 +23,12 @@
 </template>
 <script setup>
 import { $axios } from '@/axios/axios.instance';
-import { err_Msg } from '@/helpers/helpers';
 import { onMounted } from 'vue';
 import { defineAsyncComponent } from 'vue';
 import { ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 const Alert = defineAsyncComponent(()=>import('./Alert.vue'))
+const { t } = useI18n()
 const otp = ref('')
 const otpRef = ref(null)
 const msg = ref(null)
@@ -49,7 +50,7 @@ function confirmEmail(){
         emit('EmailConfirmed',message)
     }).catch(err=>{
         loading.value = false
-        msg.value = err.response.data.message || err_Msg()
+        msg.value = err.response.data.message || t('errMsg')
         console.log(err)
     })
 }
