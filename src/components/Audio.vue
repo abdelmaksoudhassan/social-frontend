@@ -11,7 +11,8 @@ const props = defineProps({
         type: String
     }
 })
-const src = computed(()=>{ return `https://social-backend-9yb5.onrender.com/media/${props.path}` })
+const url = import.meta.env.VITE_URL
+const src = computed(()=>{ return `${url}/media/${props.path}` })
 onMounted(()=>{
     window.addEventListener('load', videoScroll);
     window.addEventListener('scroll', videoScroll);

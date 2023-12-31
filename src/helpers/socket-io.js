@@ -1,13 +1,10 @@
 import socket from "socket.io-client";
-import { useCookies } from "vue3-cookies";
 
-export const io = socket('https://social-backend-9yb5.onrender.com',{
+const url = import.meta.env.VITE_URL
+export const io = socket(url,{
     withCredentials: true,
     autoConnect: false,
-    transports: ['websocket'],
-    // auth:{
-    //     Authorization: `Bearer ${useCookies().cookies.get('Access-Token')}`
-    // }
+    transports: ['websocket']
 })
 
 io.on('connect',()=>{

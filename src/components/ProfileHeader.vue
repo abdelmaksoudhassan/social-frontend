@@ -8,7 +8,7 @@
                 >
                     <v-img :src="path"></v-img>
                 </v-avatar>
-                <v-btn @click="waveUser" class="ma-3" prepend-icon="mdi-rocket">{{ $t('wave') }}</v-btn>
+                <v-btn @click="waveUser" color="deep-purple" class="ma-3" prepend-icon="mdi-rocket">{{ $t('wave') }}</v-btn>
             </v-col>
             <v-col class="d-flex justify-center align-center">
                 <div>
@@ -45,8 +45,9 @@ const AuthStore = useAuthStore()
 const Route = useRoute()
 const user = (await $axios.get(`/auth/user/${Route.params.id}`)).data
 const path = computed(()=>{
+    const url = import.meta.env.VITE_URL
     const defaultUrl = 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'
-    return user.avatar ? `https://social-backend-9yb5.onrender.com/avatars/${user.avatar}` : defaultUrl
+    return user.avatar ? `${url}/avatars/${user.avatar}` : defaultUrl
 })
 const name = computed(()=>{
     const nameVal = (user.firstName && user.lastName) ? `${user.firstName} ${user.lastName}` : user.email.split('@')[0]

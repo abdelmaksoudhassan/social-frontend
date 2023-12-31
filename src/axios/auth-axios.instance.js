@@ -6,7 +6,7 @@ const { cookies } = useCookies()
 const jwtInterceptor = axios.create({})
 
 jwtInterceptor.interceptors.request.use(config=>{
-    config.baseURL = 'https://social-backend-9yb5.onrender.com'
+    config.baseURL = import.meta.env.VITE_URL
     const accessToken = cookies.get('Access-Token')
     config.headers.Authorization = `Bearer ${accessToken}`
     return config
