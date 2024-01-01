@@ -15,6 +15,9 @@ import PostScroller from '@/components/PostScroller.vue';
 import ProfileHeader from '@/components/ProfileHeader.vue';
 import { useRoute } from 'vue-router';
 import { computed } from 'vue';
+import { onMounted } from 'vue';
+import { usePostStore } from '@/store/post';
+onMounted(()=>{ usePostStore().$reset() })
 const Route = useRoute()
 const url = computed(()=>{ return `/posts/user/${Route.params.id}` })
 </script>

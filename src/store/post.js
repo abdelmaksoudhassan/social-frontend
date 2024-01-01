@@ -30,6 +30,16 @@ export const usePostStore = defineStore('post',{
                 const element = array[index];
                 if(element._id != post) continue
                 element.likes = element.likes.filter(like=>like._id != _id)
+                break
+            }
+        },
+        deletePostComment(post,_id){
+            const array = this.allPosts
+            for (let index = 0; index < array.length; index++) {
+                const element = array[index];
+                if(element._id != post) continue
+                element.comments = element.comments.filter(item=>item != _id)
+                break
             }
         },
         deletePostByID(id){

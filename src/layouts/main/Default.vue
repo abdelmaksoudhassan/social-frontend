@@ -47,9 +47,8 @@
       text.value = `${t('postEdited')}`
     })
     io.on('NewComment',(data)=>{
-      const { post, comment } = data
+      const { comment } = data
       if(! AuthStore.ownedComment(comment._id)){
-        PostStore.addToPostComments(post,comment)
         snackbar.value = true
         text.value = `${t('newCommentOnYourPost')}`
       }

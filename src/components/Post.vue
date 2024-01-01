@@ -48,7 +48,7 @@
                     </v-card-item>
                     <v-card-item>
                         <p>{{ comment.text }}</p>
-                        <template v-if="ownedComment(comment)">
+                        <template v-if="ownedComment(comment.owner._id)">
                             <EditCommentBtn
                              size="x-small"
                              :_id="comment._id"
@@ -125,18 +125,24 @@ const comments = computed(()=>{ return post.value.comments.length})
 const likes = computed(()=>{ return post.value.likes.length})
 onMounted(()=>{
     io.on('NewLike',(data)=>{
-        PostStore.addToPostLikes(data)
+        if(! AuthStore.ownedLike(data)){
+            PostStore.addToPostLikes(data)
+        }
     }),
     io.on('NewComment',(data)=>{
-        PostStore.addToPostComments(data)
+        const { post, comment } = data
+        if(! AuthStore.ownedComment(comment.owner._id)){
+            PostStore.addToPostComments(post,comment._id)
+        }
     })
 })
 const getUrl = (id) => {
     return `comments/${id}/post/${post.value._id}`
 }
 const onDeleted = ($event,id) => {
-    console.log($event,id)
+    console.log($event)
     postComments.value = postComments.value.filter(comment=>comment._id != id)
+    PostStore.deletePostComment(post.value._id,id)
 }
 const loadComments = () => {
     commentsDialog.value.dialog = true
@@ -150,11 +156,9 @@ const loadComments = () => {
     })
 }
 const onLikedPost = (val) => {
-    console.log(val)
     post.value.likes.push(val)
 }
 const onCommentAdded = (val) => {
-    console.log(val)
     postComments.value.push(val)
     addToPostComments(post.value._id,val._id)
 }
@@ -169,7 +173,6 @@ const loadLikes = () => {
     $axios.get(`likes/post/${_id}`).then(res=>{
         return res.data
     }).then(data=>{
-        console.log(data)
         postLikes.value = data
     }).catch(err=>{
         console.log(err)

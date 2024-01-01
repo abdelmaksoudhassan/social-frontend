@@ -17,17 +17,19 @@ export const useAuthStore = defineStore('auth', {
     setUser(user){
       this.user = user
     },
-    ownedComment(comment){
-      const { _id } = comment.owner
-      return _id == this.user._id
+    ownedComment(ownerId){
+      return ownerId == this.user._id
     },
-    ownedLike(like){
-      const { _id } = like.user
+    ownedLike(user){
+      const { _id } = user
       return _id == this.user._id
     },
     ownedPost(post){
       const { _id } = post.owner
       return _id == this.user._id
+    },
+    ownedProfile(id){
+      return id == this.user._id
     }
   }
 })

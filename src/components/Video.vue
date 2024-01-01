@@ -4,9 +4,7 @@
     </video>
 </template>
 <script setup>
-import { onMounted } from 'vue';
-import { computed } from 'vue';
-
+import { onMounted, computed } from 'vue';
 const props = defineProps({
     path: {
         required: true,

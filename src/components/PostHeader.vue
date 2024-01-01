@@ -27,7 +27,7 @@ const props = defineProps({
 })
 const path = computed(()=>{
     const url = import.meta.env.VITE_URL
-    const defaultUrl = 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'
+    const defaultUrl = import.meta.env.VITE_DUMMY
     const photo = props.user.avatar ? `${url}/avatars/${props.user.avatar}` : defaultUrl
     return photo
 })

@@ -16,10 +16,10 @@
     temporary
   >
     <v-list>
-      <v-list-item prepend-icon="mdi-post" :title="$t('posts')" value="myfiles" :to="{name: 'Posts'}"></v-list-item>
-      <v-list-item prepend-icon="mdi-wrench" :title="$t('setting')" value="shared" :to="{name:'Setting'}"></v-list-item>
-      <v-list-item prepend-icon="mdi-account" :title="$t('profile')" value="starred" :to="`/main/profile/${id}`"></v-list-item>
-      <v-list-item prepend-icon="mdi-arrow-down" :title="$t('logout')" value="starred" :to="{name: 'Home'}" @click="onLogout"></v-list-item>
+      <v-list-item prepend-icon="mdi-post" :title="$t('posts')" value="posts" :to="{name: 'Posts'}"></v-list-item>
+      <v-list-item prepend-icon="mdi-wrench" :title="$t('setting')" value="setting" :to="{name:'Setting'}"></v-list-item>
+      <v-list-item prepend-icon="mdi-account" :title="$t('profile')" value="profile" :to="`/main/profile/${id}`"></v-list-item>
+      <v-list-item prepend-icon="mdi-arrow-down" :title="$t('logout')" value="logout" :to="{name: 'Home'}" @click="onLogout"></v-list-item>
     </v-list>
   </v-navigation-drawer>
 </template>

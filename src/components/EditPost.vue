@@ -4,7 +4,7 @@
             <v-textarea rows="1" clearable :label="$t('edit')" variant="outlined" v-model="text"></v-textarea>
             <div v-if="postMedia && newMedia==false" class="d-flex align-center justify-space-between">
                 <p>{{ _postMedia }}</p>
-                <v-btn @click="newMedia=true">{{$t('delete')}}</v-btn>
+                <v-btn @click="newMedia=true" color="red">{{$t('delete')}}</v-btn>
             </div>
             <template v-else>
                 <span class="text-info text-subtitle-2">
@@ -61,7 +61,7 @@ onMounted(()=>{
 })
 const _postMedia = computed(()=>{
     if(props.postMedia){
-        return props.postMedia.url.split('*%*&%')[1]
+        return props.postMedia.url.split('-social-')[1]
     }
     return null
 })

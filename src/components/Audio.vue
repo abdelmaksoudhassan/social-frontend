@@ -1,5 +1,5 @@
 <template>
-    <audio id="audioPlayer" controls autoplay>
+    <audio id="audioPlayer" controls autoplay muted>
         <source :src="src" type="audio/mp3" />
     </audio>
 </template>
@@ -14,26 +14,25 @@ const props = defineProps({
 const url = import.meta.env.VITE_URL
 const src = computed(()=>{ return `${url}/media/${props.path}` })
 onMounted(()=>{
-    window.addEventListener('load', videoScroll);
-    window.addEventListener('scroll', videoScroll);
+    window.addEventListener('load', audioScroll);
+    window.addEventListener('scroll', audioScroll);
 })
-function videoScroll() {
+function audioScroll() {
     if ( document.querySelectorAll('audio[autoplay]').length > 0) {
         var windowHeight = window.innerHeight,
-            videoEl = document.querySelectorAll('audio[autoplay]');
+            audioEl = document.querySelectorAll('audio[autoplay]');
 
-        for (var i = 0; i < videoEl.length; i++) {
-            var thisVideoEl = videoEl[i],
-                videoHeight = thisVideoEl.clientHeight,
-                videoClientRect = thisVideoEl.getBoundingClientRect().top;
-            if ( videoClientRect <= ( (windowHeight*.6) - (videoHeight*.5) ) && videoClientRect >= ( windowHeight*.3 ) ) {
-                thisVideoEl.play();
+        for (var i = 0; i < audioEl.length; i++) {
+            var thisAudioEl = audioEl[i],
+                audioHeight = thisAudioEl.clientHeight,
+                audioClientRect = thisAudioEl.getBoundingClientRect().top;
+            if ( audioClientRect <= ( (windowHeight*.6) - (audioHeight*.5) ) && audioClientRect >= ( windowHeight*.3 ) ) {
+                thisAudioEl.play();
             } else {
-                thisVideoEl.pause();
+                thisAudioEl.pause();
             }
         }
     }
-
 }
 </script>
 <style scoped>

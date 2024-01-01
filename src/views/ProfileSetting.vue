@@ -120,6 +120,10 @@ const changeName = () => {
     }).then(data=>{
         AuthStore.$patch({user: data})
         nameLoading.value = false
+        firstname.value = ''
+        lastname.value = ''
+        firstname$.value.$reset()
+        lastname$.value.$reset()
     }).catch(err=>{
         console.log(err)
         nameErr.value = err.response.data.message || t('errMsg')
